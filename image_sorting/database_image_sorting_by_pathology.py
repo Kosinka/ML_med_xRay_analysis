@@ -1,12 +1,13 @@
+#файл выполняющий сортировку данных из базы данных рентген снимков грудной клетки "ChestXray-NIHCC" по паталогиям
+
 import os
 import shutil
 import csv
 
 
 def load_csv():
-    #функция загрузки файла csv с базой данных по рентген снимкам
+    # функция загрузки файла csv с базой данных по рентген снимкам, идет вместе с базой данных
     with open(os.path.dirname(__file__) + '/../Data/Data_Entry_2017.csv') as csvfile:
-        datafile = csv.reader(csvfile, delimiter=',')
         reader = csv.reader(csvfile)
         header = next(reader, None)
         column = {}
@@ -20,7 +21,7 @@ def load_csv():
 
 
 def makedir(labels):
-    #функция создает папки для сортировки по ним рентген снимоков с разными паталогиями
+    # функция создает папки для сортировки по ним рентген снимоков с разными паталогиями
     list_of_labels = []
     new_list_of_lables = []
     os.chdir(os.path.dirname(__file__) + '/../Data/Sorted/')
@@ -40,7 +41,7 @@ def makedir(labels):
 
 
 def file_list(list_of_table, images, labels):
-    #сортировка файлов рентген снимков по папкам в зависимости от признака
+    # сортировка файлов рентген снимков по папкам в зависимости от признака
     print(os.listdir(os.path.dirname(__file__) + '/../Data/images_001/images'))
     for index, image in enumerate(images):
         if labels[index] in list_of_table:
