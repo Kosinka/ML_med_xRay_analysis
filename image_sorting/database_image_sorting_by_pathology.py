@@ -21,7 +21,8 @@ def load_csv():
 
 
 def makedir(labels):
-    # функция создает папки для сортировки по ним рентген снимоков с разными паталогиями
+    # функция создает папки для сортировки по ним рентген снимоков с разными паталогиями,
+    # снимки с несколькими паталогиями не копируются
     list_of_labels = []
     new_list_of_lables = []
     os.chdir(os.path.dirname(__file__) + '/../Data/Sorted/')
@@ -41,7 +42,7 @@ def makedir(labels):
 
 
 def file_list(list_of_table, images, labels):
-    # сортировка файлов рентген снимков по папкам в зависимости от признака
+    # сортировка файлов рентген снимков по папкам в зависимости от паталогии
     print(os.listdir(os.path.dirname(__file__) + '/../Data/images_001/images'))
     for index, image in enumerate(images):
         if labels[index] in list_of_table:
