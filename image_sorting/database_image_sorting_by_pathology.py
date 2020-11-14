@@ -7,6 +7,7 @@ import csv
 
 def load_csv():
     # функция загрузки файла csv с базой данных по рентген снимкам, идет вместе с базой данных
+    # возвращает список списков, которые содержат в себе данные о файлах в базе данных
     with open(os.path.dirname(__file__) + '/../Data/Data_Entry_2017.csv') as csvfile:
         reader = csv.reader(csvfile)
         header = next(reader, None)
@@ -16,8 +17,10 @@ def load_csv():
         for row in reader:
             for h, v in zip(header, row):
                 column[h].append(v)
-        list_of_table = makedir(column['Finding Labels'])
-        file_list(list_of_table, column['Image Index'], column['Finding Labels'])
+    return column
+
+#list_of_table = makedir(column['Finding Labels'])
+#file_list(list_of_table, column['Image Index'], column['Finding Labels'])
 
 
 def makedir(labels):
@@ -46,9 +49,12 @@ def file_list(list_of_table, images, labels):
     print(os.listdir(os.path.dirname(__file__) + '/../Data/images_001/images'))
     for index, image in enumerate(images):
         if labels[index] in list_of_table:
-            shutil.copyfile(os.path.dirname(__file__) + '/../Data/images_001/images/' + images[index], os.path.dirname(__file__) + '/../Data/Sorted/' + labels[index] + '/' + images[index])
+            shutil.copyfile(os.path.dirname(__file__) + '/../Data/images_001/images/' + images[index],
+                            os.path.dirname(__file__) + '/../Data/Sorted/' + labels[index] + '/' + images[index])
         else:
             pass
 
 
-load_csv()
+csvdata = load_csv()
+#list_of_table = makedir(csvdata['Finding Labels'])
+#file_list(list_of_table, csvdata['Image Index'], csvdata['Finding Labels'])
