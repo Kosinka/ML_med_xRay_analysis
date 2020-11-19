@@ -45,7 +45,7 @@ def make_sorted_dict():
 
 
 def snow_pathology_by_rectangle():
-    data_index = 757
+    data_index = 764
     image_with_bbox_dataset = make_sorted_dict()
     image = cv2.imread(os.path.dirname(__file__) + '/../Data/images_001/images/' + image_with_bbox_dataset['Image Index'][data_index])
     start_bbox_points = (int(float(image_with_bbox_dataset['Bbox [x'][data_index])), int(float(image_with_bbox_dataset['y'][data_index])))
