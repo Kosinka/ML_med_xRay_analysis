@@ -5,6 +5,7 @@ import csv
 import copy
 import cv2
 
+data_index = 750 # номер картинке в списке bbox
 
 def load_bbox_csv():
     # функция открывает csv файл с информацией о координатах прамоугольников,
@@ -44,19 +45,29 @@ def make_sorted_dict():
     return bbox_sorted_dataset
 
 
-def snow_pathology_by_rectangle():
-    data_index = 764
+def return_image_with_rictangle_data(data_index):
     image_with_bbox_dataset = make_sorted_dict()
-    image = cv2.imread(os.path.dirname(__file__) + '/../Data/images_001/images/' + image_with_bbox_dataset['Image Index'][data_index])
+    image_path = os.path.dirname(__file__) + '/../Data/images_001/images/' + image_with_bbox_dataset['Image Index'][data_index]
+    #image = cv2.imread(image_path)
     start_bbox_points = (int(float(image_with_bbox_dataset['Bbox [x'][data_index])), int(float(image_with_bbox_dataset['y'][data_index])))
     end_bbox_points = (int(float(image_with_bbox_dataset['Bbox [x'][data_index])) + int(float(image_with_bbox_dataset['w'][data_index])), int(float(image_with_bbox_dataset['y'][data_index])) + int(float(image_with_bbox_dataset['h]'][data_index])))
+    desease = image_with_bbox_dataset['Finding Label'][data_index]
+    return image_path, start_bbox_points, end_bbox_points, desease
+
+
+def snow_image_with_rectangle(image_index):
+    image_path, start_bbox_points, end_bbox_points, desease = return_image_with_rictangle_data(image_index)
+    image = cv2.imread(image_path)
     color = (0, 0, 255)
     tickness = 2
     image = cv2.rectangle(image, start_bbox_points, end_bbox_points, color, tickness)
-    cv2.imshow('image', image)
-    print(image_with_bbox_dataset['Finding Label'][data_index])
+    try:
+        cv2.imshow('image', image)
+    except cv2.error:
+        pass
+    print(desease)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 
-snow_pathology_by_rectangle()
+snow_image_with_rectangle(data_index)
