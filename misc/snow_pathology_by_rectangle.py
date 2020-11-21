@@ -56,8 +56,8 @@ def return_image_with_rictangle_data(data_index):
                        int(float(image_with_bbox_dataset['w'][data_index])),
                        int(float(image_with_bbox_dataset['y'][data_index])) +
                        int(float(image_with_bbox_dataset['h]'][data_index])))
-    desease = image_with_bbox_dataset['Finding Label'][data_index]
-    return image_path, start_bbox_points, end_bbox_points, desease
+    disease = image_with_bbox_dataset['Finding Label'][data_index]
+    return image_path, start_bbox_points, end_bbox_points, disease
 
 
 def snow_image_with_rectangle(image_index):
@@ -75,4 +75,12 @@ def snow_image_with_rectangle(image_index):
     cv2.destroyAllWindows()
 
 
-snow_image_with_rectangle(data_index)
+def snow_all_images_by_disease(disease):
+    bbox_sorted_dict = make_sorted_dict()
+    for index, data in enumerate(bbox_sorted_dict['Image Index']):
+        if bbox_sorted_dict['Finding Label'][index] == disease:
+            snow_image_with_rectangle(index)
+
+
+#snow_image_with_rectangle(data_index)
+snow_all_images_by_disease('Pneumonia')

@@ -9,7 +9,8 @@ clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
 cv2image3 = clahe.apply(cv2image2)
 
 print('0')
-cv2.imshow('image', cv2image3)
+cv2.imshow('image2', cv2image3)
+cv2.imshow('image1', cv2image2)
 cv2.waitKey(0)
 cv2.imwrite(str('/Data/misc_data/cv2image.png'), cv2image2)
 
