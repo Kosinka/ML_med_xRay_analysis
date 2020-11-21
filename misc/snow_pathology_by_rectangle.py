@@ -5,7 +5,8 @@ import csv
 import copy
 import cv2
 
-data_index = 750 # номер картинке в списке bbox
+data_index = 750  # номер картинке в списке bbox
+
 
 def load_bbox_csv():
     # функция открывает csv файл с информацией о координатах прамоугольников,
@@ -47,10 +48,14 @@ def make_sorted_dict():
 
 def return_image_with_rictangle_data(data_index):
     image_with_bbox_dataset = make_sorted_dict()
-    image_path = os.path.dirname(__file__) + '/../Data/images_001/images/' + image_with_bbox_dataset['Image Index'][data_index]
-    #image = cv2.imread(image_path)
-    start_bbox_points = (int(float(image_with_bbox_dataset['Bbox [x'][data_index])), int(float(image_with_bbox_dataset['y'][data_index])))
-    end_bbox_points = (int(float(image_with_bbox_dataset['Bbox [x'][data_index])) + int(float(image_with_bbox_dataset['w'][data_index])), int(float(image_with_bbox_dataset['y'][data_index])) + int(float(image_with_bbox_dataset['h]'][data_index])))
+    image_path = os.path.dirname(__file__) + '/../Data/images_001/images/' + \
+                 image_with_bbox_dataset['Image Index'][data_index]
+    start_bbox_points = (int(float(image_with_bbox_dataset['Bbox [x'][data_index])),
+                         int(float(image_with_bbox_dataset['y'][data_index])))
+    end_bbox_points = (int(float(image_with_bbox_dataset['Bbox [x'][data_index])) +
+                       int(float(image_with_bbox_dataset['w'][data_index])),
+                       int(float(image_with_bbox_dataset['y'][data_index])) +
+                       int(float(image_with_bbox_dataset['h]'][data_index])))
     desease = image_with_bbox_dataset['Finding Label'][data_index]
     return image_path, start_bbox_points, end_bbox_points, desease
 

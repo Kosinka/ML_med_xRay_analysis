@@ -56,5 +56,5 @@ def file_list(list_of_table, images, labels):
 
 
 csvdata = load_csv()
-#list_of_table = makedir(csvdata['Finding Labels'])
-#file_list(list_of_table, csvdata['Image Index'], csvdata['Finding Labels'])
+list_of_table = makedir(csvdata['Finding Labels'])
+file_list(list_of_table, csvdata['Image Index'], csvdata['Finding Labels'])
